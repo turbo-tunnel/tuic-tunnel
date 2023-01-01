@@ -2,7 +2,7 @@
 
 ## WHAT IS TUIC
 
-[TUIC](https://github.com/EAimTY/tuic)is a high performance proxy based on QUIC protocol.
+[TUIC](https://github.com/EAimTY/tuic) is a high performance proxy based on QUIC protocol.
 
 ## INSTALL
 
