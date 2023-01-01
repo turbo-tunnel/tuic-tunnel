@@ -11,6 +11,7 @@ import turbo_tunnel
 
 
 class TUICTunnel(turbo_tunnel.socks.Socks5Tunnel):
+    """TUIC Tunnel"""
 
     tuic_process = None
     tuic_local_port = random.randint(10000, 20000)
