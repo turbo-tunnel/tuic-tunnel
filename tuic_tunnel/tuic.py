@@ -4,6 +4,7 @@ import asyncio
 import os
 import platform
 import random
+import subprocess
 import sys
 
 import turbo_tunnel
@@ -37,6 +38,8 @@ class TUICTunnel(turbo_tunnel.socks.Socks5Tunnel):
         bin_path = os.path.join(
             current_path, "bin", sys.platform, "tuic-client-%s" % platform.machine()
         )
+        if sys.platform == "win32":
+            bin_path += ".exe"
         if not os.path.isfile(bin_path):
             raise RuntimeError("File %s not exist" % bin_path)
         if sys.platform != "win32":
@@ -45,7 +48,10 @@ class TUICTunnel(turbo_tunnel.socks.Socks5Tunnel):
             "%s --server=%s --server-port=%d --token=%s --local-port=%d --alpn=h3"
             % (bin_path, server[0], server[1], token, listen_port)
         )
-        return await asyncio.create_subprocess_shell(cmdline)
+        if sys.platform != "win32":
+            return await asyncio.create_subprocess_shell(cmdline)
+        else:
+            return subprocess.Popen(cmdline)
 
 
 turbo_tunnel.registry.tunnel_registry.register("tuic", TUICTunnel)
