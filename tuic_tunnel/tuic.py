@@ -49,10 +49,7 @@ class TUICTunnel(turbo_tunnel.socks.Socks5Tunnel):
             "%s --server=%s --server-port=%d --token=%s --local-port=%d --alpn=h3"
             % (bin_path, server[0], server[1], token, listen_port)
         )
-        if sys.platform != "win32":
-            return await asyncio.create_subprocess_shell(cmdline)
-        else:
-            return subprocess.Popen(cmdline)
+        return await turbo_tunnel.utils.create_process(cmdline)
 
 
 turbo_tunnel.registry.tunnel_registry.register("tuic", TUICTunnel)
