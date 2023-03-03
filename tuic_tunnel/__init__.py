@@ -2,7 +2,7 @@
 
 import traceback
 
-VERSION = "0.1.3"
+VERSION = "0.1.4"
 
 try:
     from . import tuic

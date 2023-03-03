@@ -41,4 +41,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.10',
         'Intended Audience :: Developers',
     ],
+    include_package_data=True
 )
